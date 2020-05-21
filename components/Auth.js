@@ -5,8 +5,10 @@ import {
     AsyncStorage,
     ActivityIndicator
 } from 'react-native';
-import firestore from 'firebase/firestore'
-import firebase from 'firebase'
+
+
+import * as firebase from 'firebase'
+import 'firebase/firestore'
 
 console.disableYellowBox = true;
 
@@ -91,3 +93,57 @@ export async function UpdateLocation(Lat, Long) {
 
 }
 
+export async function getCurrentUserObj() {
+    userObj = await firebase.auth().currentUser;
+    if (userObj) {
+        return userObj
+    }
+    return null
+}
+
+export async function getUserFirestoreObj() {
+    const uid = await getCurrentUid();
+    let userObj = null;
+    await firebase.firestore().collection('Users').where('userID', '==', uid).get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            if (doc.data().userID == uid) {
+                userObj = [doc.id, doc.data()];
+            }
+        })
+    }).catch(error => { return null })
+    return userObj
+}
+
+export async function getFirestoreUserByUid(uid) {
+    let userObj = null;
+    await firebase.firestore().collection('Users').where('userID', '==', uid).get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            if (doc.data().userID == uid) {
+                userObj = [doc.id, doc.data()];
+            }
+        })
+    }).catch(error => { return null })
+    return userObj
+}
+
+
+export default class Auth extends Component {
+    constructor(props) {
+        super(props)
+        this._bootstrapAsync()
+    }
+
+    _bootstrapAsync = async () => {
+        var UserEmail = await AsyncStorage.getItem('Email')
+        this.props.navigation.navigate(UserEmail ? 'App' : 'Auth')
+    }
+
+    render() {
+        return (
+            <View>
+                <ActivityIndicator />
+                <StatusBar barStyle='default' />
+            </View>
+        )
+    }
+}

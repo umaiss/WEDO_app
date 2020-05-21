@@ -17,7 +17,7 @@ var { width } = Dimensions.get("window")
 
 console.disableYellowBox = true;
 
-export default class UserLoginScreen extends Component {
+export default class Login extends Component {
 
     constructor(props) {
         super(props)
@@ -59,7 +59,7 @@ export default class UserLoginScreen extends Component {
     }
 
     isErrorFree() {
-        if (this.state.errUs == '' && this.state.errem == '' && this.state.errps == '' && this.state.errpn == '' && this.state.errsn == '')
+        if ( this.state.errem == '' && this.state.errps == '' )
             return true
         this.setState({ formErrorDialog: true })
         return false
@@ -77,11 +77,19 @@ export default class UserLoginScreen extends Component {
     SubmitForm = async () => {
         console.log('i am login', this.state)
         await AsyncStorage.setItem('Email', this.state.email)
+      
+        
+        
+        console.log('umais here')
+        
+      
+
         await login(this.state.email, this.state.password).then(async () => {
             console.log('Hello Home')
             this.props.navigation.navigate('Dashboard')
         })
     }
+
 
     // //google signin
 
@@ -144,72 +152,72 @@ export default class UserLoginScreen extends Component {
 
 
 
-    // _AuthFB() {
-    //     const dhis = this
-    //     // Attempt a login using the Facebook login dialog asking for default permissions.
-    //     LoginManager.logInWithPermissions(["public_profile", "email"]).then(
-    //         function (result) {
-    //             if (result.isCancelled) {
-    //                 console.log("Login cancelled");
-    //             } else {
-    //                 console.log(
-    //                     "Login success with permissions: " +
-    //                     result.grantedPermissions.toString()
-    //                 );
-    //                 dhis._setDataFB()
-    //             }
-    //         },
-    //         function (error) {
-    //             console.log("Login fail with error: " + error);
-    //         }
-    //     );
-    // }
+    _AuthFB() {
+        const dhis = this
+        // Attempt a login using the Facebook login dialog asking for default permissions.
+        LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+            function (result) {
+                if (result.isCancelled) {
+                    console.log("Login cancelled");
+                } else {
+                    console.log(
+                        "Login success with permissions: " +
+                        result.grantedPermissions.toString()
+                    );
+                    dhis._setDataFB()
+                }
+            },
+            function (error) {
+                console.log("Login fail with error: " + error);
+            }
+        );
+    }
 
 
-    // async _setDataFB() {
-    //     // get token from facebook
-    //     const tokenData = await AccessToken.getCurrentAccessToken().then(
-    //         (data) => {
-    //             return data.accessToken.toString()
-    //         }
-    //     )
-    //     // get data about profile from api graph
-    //     const datajson = await this.apiGraphFace(tokenData)
+    async _setDataFB() {
+        // get token from facebook
+        const tokenData = await AccessToken.getCurrentAccessToken().then(
+            (data) => {
+                return data.accessToken.toString()
+            }
+        )
+        // get data about profile from api graph
+        const datajson = await this.apiGraphFace(tokenData)
 
-    //     if (datajson.success) {
-    //         // variable para enviar post
-    //         const data_fb = {
-    //             id_facebook: datajson.data.id,
-    //             email: datajson.data.email,
-    //             name: datajson.data.name,
-    //             picture: datajson.data.picture
-    //         }
-    //         this.setState(data_fb);
-    //     }
-    // }
+        if (datajson.success) {
+            // variable para enviar post
+            const data_fb = {
+                id_facebook: datajson.data.id,
+                email: datajson.data.email,
+                name: datajson.data.name,
+                picture: datajson.data.picture
+            }
+            this.setState(data_fb);
+        }
+    }
 
 
-    // async apiGraphFace(token) {
+    async apiGraphFace(token) {
 
-    //     const resface = await fetch('https://graph.facebook.com/v2.10/me?fields=id,name,email,picture.width(500)&access_token=' + token)
-    //         .then((response) => response.json())
-    //         .then((json) => {
-    //             const data = {
-    //                 data: json,
-    //                 success: true
-    //             }
-    //             return data;
-    //         })
-    //         .catch((error) => {
-    //             const data = {
-    //                 message: error,
-    //                 success: false
-    //             }
-    //             return data;
-    //         })
+        const resface = await fetch('https://graph.facebook.com/v2.10/me?fields=id,name,email,picture.width(500)&access_token=' + token)
+            .then((response) => response.json())
+            .then((json) => {
+                const data = {
+                    data: json,
+                    success: true
+                }
+                return data;
+            })
+            .catch((error) => {
+                const data = {
+                    message: error,
+                    success: false
+                }
+                return data;
+            })
 
-    //     return resface;
-    // }
+        return resface;
+    }
 
 
     render() {
@@ -249,7 +257,7 @@ export default class UserLoginScreen extends Component {
                 </Text>
                 <View style={{marginLeft:'55%'}}>
                 <TouchableOpacity   onPress={() => {
-                        this.props.navigation.navigate('Signup')}}>
+                        this.props.navigation.navigate('ForgotPassword')}}>
                     <Text style={{color:'#BE1E2D'}}>
                         Forgotten Password?
 
@@ -308,7 +316,7 @@ onPress={this._AuthFB}
                 <View style={{ flexDirection: 'row', marginTop:10,alignSelf:"center" }}>
                     <Text>Don't have account?</Text>
                     <TouchableOpacity onPress={() => {
-                        this.props.navigation.navigate('ForgotPassword')
+                        this.props.navigation.navigate('Signup')
                     }}>
                         <Text style={{ color: '#BE1E2D' }}>  Sign Up</Text>
                     </TouchableOpacity>

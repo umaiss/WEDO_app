@@ -6,7 +6,7 @@ import {  Card, Text, Body,Form,Textarea } from 'native-base';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Searchbar } from 'react-native-paper';
-import Carousel,{ ParallaxImage,Pagination } from 'react-native-snap-carousel';
+// import Carousel,{ ParallaxImage,Pagination } from 'react-native-snap-carousel';
 
 
 
@@ -42,45 +42,45 @@ class Dashboard extends Component {
   //     <Image style={styles.cardImage} source={item.image} />
   //   </View>
  
-  _renderItem ({item, index}, parallaxProps) {
-    return (
-        <View style={styles.item}>
-            <ParallaxImage
+//   _renderItem ({item, index}, parallaxProps) {
+//     return (
+//         <View style={styles.item}>
+//             <ParallaxImage
                 
-                containerStyle={styles.imageContainer}
-                style={styles.image}
-                parallaxFactor={0.4}
+//                 containerStyle={styles.imageContainer}
+//                 style={styles.image}
+//                 parallaxFactor={0.4}
 
                 
-            />
+//             />
             
            
-            <Image style={styles.title} source={item.image} />
+//             <Image style={styles.title} source={item.image} />
              
-        </View>
-    );
-}
-get pagination () {
-  const { deals, activeSlide } = this.state;
-  return (
-      <Pagination
-        dotsLength={deals.length}
-        activeDotIndex={activeSlide}
-        dotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            marginHorizontal: 5,
-            backgroundColor: 'black'
-        }}
-        inactiveDotStyle={{
-            // Define styles for inactive dots here
-        }}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      />
-  );
-}
+//         </View>
+//     );
+// }
+// get pagination () {
+//   const { deals, activeSlide } = this.state;
+//   return (
+//       <Pagination
+//         dotsLength={deals.length}
+//         activeDotIndex={activeSlide}
+//         dotStyle={{
+//             width: 10,
+//             height: 10,
+//             borderRadius: 5,
+//             marginHorizontal: 5,
+//             backgroundColor: 'black'
+//         }}
+//         inactiveDotStyle={{
+//             // Define styles for inactive dots here
+//         }}
+//         inactiveDotOpacity={0.4}
+//         inactiveDotScale={0.6}
+//       />
+//   );
+// }
 
 
 
@@ -118,7 +118,7 @@ get pagination () {
             sliderWidth={Dimensions.get('window').width}
             itemWidth={300}
           /> */}
-          <View>
+          {/* <View>
 
             <Carousel
                 sliderWidth={screenWidth}
@@ -129,7 +129,7 @@ get pagination () {
                 hasParallaxImages={true}
             />
             { this.pagination }
-            </View>
+            </View> */}
 
 
 

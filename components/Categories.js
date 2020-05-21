@@ -80,8 +80,7 @@ export default class Categories extends Component {
           </View>
                
                
-          <Text>Appd delivery </Text>
-          <Text>{JSON.stringify(this.state.dataFood)} </Text>
+          
         </View>
       </ScrollView>
     ); 

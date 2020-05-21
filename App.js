@@ -29,15 +29,16 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
-// import Splash from './components/Splash';
+import Splash from './components/Splash';
 import Sellerdashboard from './components/Sellerdashboard';
 // import Startpage from './components/Startpage';
-// import ForgotPassword from './components/ForgotPassword';
+import ForgotPassword from './components/ForgotPassword';
 // import AddStore from './components/AddStore';
 import AddDashboard from './components/AddDashboard';
 import PaymentsOptions from './components/PaymentsOptions';
 import AddDeal from './components/AddDeal';
 import Map from './components/Map';
+import Auth from './components/Auth';
 import * as firebase from 'firebase'
 import firestore from 'firebase/firestore'
 
@@ -47,19 +48,20 @@ import firestore from 'firebase/firestore'
     const RootStack = createStackNavigator(
       {
         
-        // Splash:Splash,
+        Splash:Splash,
         
         // Startpage:Startpage,
         Login:Login,
         Signup:Signup,
         Dashboard:Dashboard,
         Sellerdashboard:Sellerdashboard,
-        // ForgotPassword:ForgotPassword,
+        ForgotPassword:ForgotPassword,
         // AddStore:AddStore,
         AddDashboard:AddDashboard,
         AddDeal:AddDeal,
         PaymentsOptions:PaymentsOptions,
-        Map:Map
+        Map:Map,
+        Auth:Auth
        
       },
       {

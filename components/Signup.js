@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text,  TouchableOpacity, SafeAreaView, StatusBar, Image, ActivityIndicator, StyleSheet, Alert } from 'react-native';
+import { View, Text,  TouchableOpacity, SafeAreaView, StatusBar,AsyncStorage, Image, ActivityIndicator, StyleSheet, Alert } from 'react-native';
 
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { TextInput,Button } from 'react-native-paper';
 import * as firebase from 'firebase'
 import 'firebase/firestore'
 
-import { signup, emailVerification } from './Auth'
+import { signup,emailVerification, logout, getUserFirestoreObj, getCurrentUserObj } from './Auth'
 import { ScrollView } from 'react-native-gesture-handler';
 
 console.disableYellowBox = true;
@@ -28,12 +28,11 @@ export default class Signup extends Component {
             errCNIC:'',
            
 
-            formEmptyDialog: false, formErrorDialog: false, btnIndicator: false,
-            btnDisabled: false, signupErrorDialog: false, signupError: '',
+            btnIndicator: false, signupError: '',
+            btnDisabled: false, signupErrorDialog: false,
         }
         this.initialState = this.state
         this.validate = this.validate.bind(this)
-        this.goToLogin = this.goToLogin.bind(this)
         this.isFormEmpty = this.isFormEmpty.bind(this)
         this.isErrorFree = this.isErrorFree.bind(this)
     }
@@ -42,7 +41,7 @@ export default class Signup extends Component {
         if (type == 'UserName') {
             this.setState({ UserName: text })
             let msg = this.getMatch(/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z])$/, text, "Username only contains alphabets")
-            this.setState({ errfn: msg })
+            this.setState({ errUs: msg })
         }
         else if (type == 'email') {
             this.setState({ email: text })
@@ -62,6 +61,9 @@ export default class Signup extends Component {
         else if (type == 'Address') {
             this.setState({ address: text })
         }
+        else if (type == 'CNIC') {
+            this.setState({ CNIC: text })
+        }
     }
 
     isFormEmpty() {
@@ -72,7 +74,7 @@ export default class Signup extends Component {
     }
 
     isErrorFree() {
-        if (this.state.errUs == '' && this.state.errem == '' && this.state.errps == '' && this.state.errpn == '' && this.state.errad == ''&& this.state.errCNIC == '')
+        if (this.state.errUs == '' && this.state.errem == '' && this.state.errps == '' && this.state.errpn == '')
             return true
         this.setState({ formErrorDialog: true })
         return false
@@ -93,33 +95,49 @@ export default class Signup extends Component {
          await firebase.firestore().collection('Users').doc().set(obj).then(() => console.log('hello world')).catch((error) => console.log('hello2\n:::::', error));
      }*/
 
-    goToLogin = async () => {
+     goToForm = async () => {
+         console.log('i am above the firebase')
+        await firebase.firestore().collection('Users').doc().set({'User':'umasi'}).then(()=>console.log('i failed')).catch((error) => console.log(error.message))
+              
+         console.log(this.isErrorFree())
         if (!this.isFormEmpty() && this.isErrorFree()) {
             this.setState({ btnDisabled: true })
             this.setState({ btnIndicator: true })
+            console.log("hello")
 
             await signup(this.state.email, this.state.password).then(async () => {
                 var user = firebase.auth().currentUser;
-                if (user) {
-                    var userObj = {
-                        UserName: this.state.UserName,
-                        email: this.state.email,
-                        password: this.state.password,
-                        phonenumber: this.state.PhoneNumber,
-                        address: this.state.address,
-                        CNIC:this.state.CNIC,
-                        type: 'Super User',
-                        userID: user.uid,
-                    }
-                } else
+                if (!user)
                     throw new Exception()
-                console.log('heloo')
-                await firebase.firestore().collection('Users').doc().set(userObj).then(() => console.log('hello world')).catch((error) => console.log(error));
-                // emailVerification()
+              //  logout()
+                if (getCurrentUserObj()) {
+                    this.setState({ UserId: user.uid })
+
+                    await AsyncStorage.setItem('UserId', user.uid);
+                    console.log('Hello world', this.state.UserId)
+                   /* await firebase.firestore().collection('Users').doc().set({
+                        'UserName': this.state.UserName,
+                        'email': this.state.email,
+                        'password': this.state.password,
+                        'phonenumber': this.state.PhoneNumber,
+                        'address':this.state.address,
+                        'CNIC':this.state.CNIC,
+                        'userID': user.uid,
+                    }).then(() => { console.log('SignUp Sucessful') }).catch((error) => console.log(error.message))
+                */
+               }
+                //emailVerification()
                 this.setState(this.initialState)
-                this.props.navigation.navigate('Login')
+                this.props.navigation.navigate('Login', {
+                    UserName: this.state.UserName,
+                    email: this.state.email,
+                    password: this.state.password,
+                    phonenumber: this.state.PhoneNumber,
+                    address:this.state.address,
+                    CNIC:this.state.CNIC,
+                    UserId: this.state.UserId
+                })
             }).catch((error) => {
-                Alert.alert(error.message)
                 this.setState({ signupError: error.message })
                 this.setState({ signupErrorDialog: true })
             }
@@ -127,6 +145,9 @@ export default class Signup extends Component {
                 this.setState({ btnDisabled: false })
                 this.setState({ btnIndicator: false })
             })
+        }
+        else {
+            Alert.alert('Invalid Input Feilds', 'Plzz Input correct feilds')
         }
     }
 
@@ -237,8 +258,7 @@ export default class Signup extends Component {
                 <Button   mode="outlined"
                 color='#BE1E2D' 
 
-                 onPress={this.goToLogin}
-                
+                onPress={() => this.goToForm()}
                 >
                Sign Up
                 </Button>
