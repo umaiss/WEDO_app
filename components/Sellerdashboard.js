@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, ImageBackground, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Right, Text, Button, Left, Body, Input, Item,Form,Textarea } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Right, Text, Button, Left, Body, Input, Item, Form, Textarea } from 'native-base';
 
 import { responsiveWidth, responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,6 +29,7 @@ class Sellerdashboard extends Component {
     super(props),
       this.state = {
         visible: false,
+        Card2Visible: false,
         imageSource: null,
         firstQuery: '',
 
@@ -38,6 +39,10 @@ class Sellerdashboard extends Component {
   toggleModal = () => {
     this.setState({ visible: !this.state.visible });
   };
+  toggleCard2Modal = () => {
+    this.setState({ Card2Visible: !this.state.Card2Visible });
+   
+};
 
 
   SelectImage = async () => {
@@ -114,104 +119,169 @@ class Sellerdashboard extends Component {
           <View>
 
             <View style={styles.direction}>
-              <TouchableOpacity
-                onPress={() => { this.setState({ visible: true }); }}>
-                <Card style={styles.card}>
-                  <ScrollView>
+              <View>
+                <TouchableOpacity
+                  onPress={() => { this.setState({ visible: true }); }}>
+                  <Card style={styles.card}>
+                    <ScrollView>
 
 
-                    <Dialog
-                      visible={this.state.visible}
-                      footer={
-                        <DialogFooter >
-                          <DialogButton
-                            text="CANCEL"
-                            onPress={
-                              this.toggleModal
-                            }
-                          // style={[styles.btn, { backgroundColor: '#DB4437' }]}
-                          />
-                          <DialogButton
-                            text="Add"
-                          // style={[styles.btn, { backgroundColor: '#4285F4' }]}
-                          />
-                        </DialogFooter>
-                      }
-                    >
-                      <DialogContent style={styles.DialogCard}>
-                        <View style={styles.AddContainer}>
-
-                          <Text style={styles.ImageText}>Tap To Add Images</Text>
-                          <TouchableOpacity style={styles.ProductImagesCard} activeOpacity={0.5} onPress={this.SelectImage}>
-                            <View>
-                              {
-                                this.state.avatarSource && <Image source={{ uri: this.state.avatarSource }}
-                                  style={{ height: responsiveHeight(20), width: responsiveWidth(45), justifyContent: 'center', alignSelf: 'center', borderWidth: 4, borderColor: 'white' }} />
+                      <Dialog
+                        visible={this.state.visible}
+                        footer={
+                          <DialogFooter >
+                            <DialogButton
+                              text="CANCEL"
+                              onPress={
+                                this.toggleModal
                               }
-                            </View>
-                          </TouchableOpacity>
+                            // style={[styles.btn, { backgroundColor: '#DB4437' }]}
+                            />
+                            <DialogButton
+                              text="Add"
+                            // style={[styles.btn, { backgroundColor: '#4285F4' }]}
+                            />
+                          </DialogFooter>
+                        }
+                      >
+                        <DialogContent style={styles.DialogCard}>
+                          <View style={styles.AddContainer}>
+
+                            <Text style={styles.ImageText}>Tap To Add Images</Text>
+                            <TouchableOpacity style={styles.ProductImagesCard} activeOpacity={0.5} onPress={this.SelectImage}>
+                              <View>
+                                {
+                                  this.state.avatarSource && <Image source={{ uri: this.state.avatarSource }}
+                                    style={{ height: responsiveHeight(20), width: responsiveWidth(45), justifyContent: 'center', alignSelf: 'center', borderWidth: 4, borderColor: 'white' }} />
+                                }
+                              </View>
+                            </TouchableOpacity>
 
 
 
-                          <TextInput
-                            style={styles.inputField}
-                            placeholder='Deal Name'
-                            keyboardType='Default'
-                            underlineColorAndroid="transparent"
-                          />
+                            <TextInput
+                              style={styles.inputField}
+                              placeholder='Deal Name'
+                              keyboardType='Default'
+                              underlineColorAndroid="transparent"
+                            />
 
-              <Form >
-            <Textarea rowSpan={5} bordered placeholder="TDescription" style={{borderRadius:10,marginTop:20,backgroundColor:'#e6e6e6'}}/>
-          </Form>
-                       
-
-
-                          <TextInput
-                            style={styles.inputField}
-                            placeholder='Price'
-                            keyboardType='Default'
-                            underlineColorAndroid="transparent"
-                          />
-
-                          <TextInput
-                            style={styles.inputField}
-                            placeholder='Store Name'
-                            keyboardType='Default'
-                            underlineColorAndroid="transparent"
-                            multiline={true}
-                          />
+                            <Form >
+                              <Textarea rowSpan={5} bordered placeholder="TDescription" style={{ borderRadius: 10, marginTop: 20, backgroundColor: '#e6e6e6' }} />
+                            </Form>
 
 
 
-                        </View>
-                      </DialogContent>
-                    </Dialog>
-                  </ScrollView>
+                            <TextInput
+                              style={styles.inputField}
+                              placeholder='Price'
+                              keyboardType='Default'
+                              underlineColorAndroid="transparent"
+                            />
 
-                  <Image source={require('./img/bread-background-wheat-aromatic-crispbread-grains-copy-space-top-view-bakery-grocery-food-store-concept-134406721.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(50), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
-                  <Body>
-
-                    <Text style={styles.innerText}>ADD DEAL</Text>
-
-                  </Body>
-                </Card>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Sellerdashboard')} >
+                            <TextInput
+                              style={styles.inputField}
+                              placeholder='Store Name'
+                              keyboardType='Default'
+                              underlineColorAndroid="transparent"
+                              multiline={true}
+                            />
 
 
-                <Card style={styles.card}>
 
-                  <Image source={require('./img/Sketching2.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(50), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
+                          </View>
+                        </DialogContent>
+                      </Dialog>
+                    </ScrollView>
 
-                  <Body>
+                    <Image source={require('./img/bread-background-wheat-aromatic-crispbread-grains-copy-space-top-view-bakery-grocery-food-store-concept-134406721.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(50), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
+                    <Body>
 
-                    <Text style={styles.innerText}>ADD STORE</Text>
+                      <Text style={styles.innerText}>ADD DEAL</Text>
 
-                  </Body>
-                </Card>
-              </TouchableOpacity>
+                    </Body>
+                  </Card>
+                </TouchableOpacity>
+              </View>
+
+              <View>
+                <TouchableOpacity
+                  onPress={() => { this.setState({ Card2Visible: true }); }}>
+
+
+
+                  <Card style={styles.card}>
+
+                    <ScrollView>
+                      <Dialog
+                        visible={this.state.Card2Visible}
+                        footer={
+                          <DialogFooter >
+                            <DialogButton
+                              text="CANCEL"
+                              onPress={
+                                this.toggleCard2Modal
+                               
+                              }
+                            // style={[styles.btn, { backgroundColor: '#DB4437' }]}
+                            />
+                            <DialogButton
+                              text="Add"
+                            // style={[styles.btn, { backgroundColor: '#4285F4' }]}
+                            />
+                          </DialogFooter>
+                        }
+                      >
+                        <DialogContent style={styles.DialogCard}>
+                          <View style={styles.AddContainer}>
+
+                            <Text style={styles.ImageText}>Tap To Add Images</Text>
+                            <TouchableOpacity style={styles.ProductImagesCard} activeOpacity={0.5} onPress={this.SelectImage}>
+                              <View>
+                                {
+                                  this.state.avatarSource && <Image source={{ uri: this.state.avatarSource }}
+                                    style={{ height: responsiveHeight(20), width: responsiveWidth(45), justifyContent: 'center', alignSelf: 'center', borderWidth: 4, borderColor: 'white' }} />
+                                }
+                              </View>
+                            </TouchableOpacity>
+
+
+
+                            <TextInput
+                              style={styles.inputField}
+                              placeholder='Deal Name'
+                              keyboardType='Default'
+                              underlineColorAndroid="transparent"
+                            />
+
+                            <Form >
+                              <Textarea rowSpan={5} bordered placeholder="TDescription" style={{ borderRadius: 10, marginTop: 20, backgroundColor: '#e6e6e6' }} />
+                            </Form>
+
+
+
+                            <TextInput
+                              style={styles.inputField}
+                              placeholder='Location'
+                              keyboardType='Default'
+                              underlineColorAndroid="transparent"
+                            />
+                          </View>
+                        </DialogContent>
+                      </Dialog>
+                    </ScrollView>
+
+
+                    <Image source={require('./img/Sketching2.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(50), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
+
+                    <Body>
+
+                      <Text style={styles.innerText}>ADD STORE</Text>
+
+                    </Body>
+                  </Card>
+                </TouchableOpacity>
+              </View>
             </View>
 
             <View style={styles.direction}>
@@ -326,7 +396,7 @@ const styles = StyleSheet.create({
   {
     flexDirection: 'row',
   },
- 
+
 
   innerText: {
     textAlign: 'center'
@@ -353,7 +423,7 @@ const styles = StyleSheet.create({
   },
   ProductImagesCard: {
     alignSelf: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     top: 20,
     right: 42,
     marginBottom: 20,
@@ -374,7 +444,7 @@ const styles = StyleSheet.create({
   ImageText: {
     fontSize: responsiveFontSize(1.5),
     fontWeight: 'bold',
-    alignSelf:'center',
+    alignSelf: 'center',
     bottom: -20,
     marginRight: 80
   },
