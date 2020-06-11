@@ -33,7 +33,7 @@ import Splash from './components/Splash';
 import Sellerdashboard from './components/Sellerdashboard';
 // import Startpage from './components/Startpage';
 import ForgotPassword from './components/ForgotPassword';
-// import AddStore from './components/AddStore';
+import AddStore from './components/AddStore';
 import AddDashboard from './components/AddDashboard';
 import PaymentsOptions from './components/PaymentsOptions';
 import AddDeal from './components/AddDeal';
@@ -41,7 +41,8 @@ import Map from './components/Map';
 import Auth from './components/Auth';
 import * as firebase from 'firebase'
 import firestore from 'firebase/firestore'
-
+import PaymentIntegration from './components/PaymentIntegration';
+import Notification from './components/Notification';
 
 
 
@@ -56,12 +57,14 @@ import firestore from 'firebase/firestore'
         Dashboard:Dashboard,
         Sellerdashboard:Sellerdashboard,
         ForgotPassword:ForgotPassword,
-        // AddStore:AddStore,
+        AddStore:AddStore,
         AddDashboard:AddDashboard,
         AddDeal:AddDeal,
         PaymentsOptions:PaymentsOptions,
         Map:Map,
-        Auth:Auth
+        Auth:Auth,
+        PaymentIntegration:PaymentIntegration,
+        Notification:Notification
        
       },
       {

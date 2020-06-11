@@ -11,6 +11,7 @@ import { Text,
 } from 'react-native';
 var {height, width } = Dimensions.get('window');
 import Swiper from 'react-native-swiper'
+import { Appbar } from 'react-native-paper';
 
 
 export default class Categories extends Component {
@@ -48,6 +49,15 @@ export default class Categories extends Component {
   render() {
     return (
       <ScrollView >
+          <Appbar.Header style={{backgroundColor:'#BE1E2D'}}>
+           
+           <Appbar.BackAction
+             onPress={() =>this.props.navigation.goBack()}
+           />
+           <Appbar.Content
+             title="Categories"
+           />
+         </Appbar.Header>
         <View style={{ flex: 20, backgroundColor: "f2f2f2"}}>
           <View style = {{width: width, alignItems: 'center'}}>
            

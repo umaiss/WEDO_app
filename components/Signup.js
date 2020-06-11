@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text,  TouchableOpacity, SafeAreaView, StatusBar,AsyncStorage, Image, ActivityIndicator, StyleSheet, Alert } from 'react-native';
 
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
-import { TextInput,Button } from 'react-native-paper';
+import { TextInput,Button,Appbar } from 'react-native-paper';
 import * as firebase from 'firebase'
 import 'firebase/firestore'
 
@@ -22,6 +22,9 @@ export default class Signup extends Component {
             UserName: '', email: '',
             password: '', PhoneNumber: '',
             address:'',   CNIC:'',
+            //For radio button
+         checked: 'first',
+            
 
             errUs: '', errem: '',
             errps: '', errpn: '',
@@ -165,7 +168,15 @@ export default class Signup extends Component {
                
                
 
-                <Text style={Styles.HearderText}>Sign Up</Text>
+                <Appbar.Header style={{backgroundColor:'#BE1E2D'}}>
+           
+           <Appbar.BackAction
+             onPress={() =>this.props.navigation.goBack()}
+           />
+           <Appbar.Content
+             title="Signup"
+           />
+         </Appbar.Header>
 
                 <View style={Styles.Username}>
                  <TextInput 
@@ -301,7 +312,7 @@ const Styles = StyleSheet.create({
         fontSize: responsiveFontSize(2.8),
         fontWeight: 'bold',
         width: 200,
-        marginBottom: 60,
+        marginBottom: 40,
         color: 'black',
         alignSelf:'center'
     },

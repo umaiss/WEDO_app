@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { StyleSheet,  View,Text, Image, ImageBackground,TouchableOpacity, } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput, Button,Appbar } from 'react-native-paper';
 import firebase from 'firebase';
 
 import { responsiveFontSize, responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
@@ -66,7 +66,15 @@ export default class ForgotPassword extends Component {
     <View style={styles.container}>
 
         
-<Text style={styles.HearderText}>Forgot Password</Text>
+<Appbar.Header style={{backgroundColor:'#BE1E2D'}}>
+           
+           <Appbar.BackAction
+             onPress={() =>this.props.navigation.goBack()}
+           />
+           <Appbar.Content
+             title="Forgot Password"
+           />
+         </Appbar.Header>
                         <View style={styles.email}> 
                     <TextInput
                         label='Email'
@@ -110,7 +118,9 @@ email: {
 
     width: responsiveWidth(80),
     justifyContent: 'center',
-    alignSelf:"center"
+    alignSelf:"center",
+    marginVertical:'50%'
+    
 
 },
 error: {

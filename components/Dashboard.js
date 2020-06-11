@@ -5,7 +5,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {  Card, Text, Body,Form,Textarea } from 'native-base';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, } from 'react-native-paper';
+
 // import Carousel,{ ParallaxImage,Pagination } from 'react-native-snap-carousel';
 
 
@@ -33,6 +34,7 @@ class Dashboard extends Component {
 
     };
   }
+  
 
   
 
@@ -85,6 +87,7 @@ class Dashboard extends Component {
 
 
   render() {
+    
 
     const { firstQuery } = this.state;
 
@@ -95,18 +98,17 @@ class Dashboard extends Component {
         <ScrollView>
 
           <View style={{ flexDirection: 'row' }}>
-            <Searchbar style={{ width: responsiveWidth(90) }}
+            <Searchbar style={{ width: responsiveWidth(90), }}
               placeholder="Search"
               onChangeText={query => { this.setState({ firstQuery: query }); }}
               value={firstQuery}
 
             />
-
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Map789')} >
-              <Image source={require('./img/pin.png')} style={{ height: responsiveHeight(7.5), width: responsiveWidth(10), flex: 1 }} />
-            </TouchableOpacity>
-
+<TouchableOpacity
+               onPress={() => this.props.navigation.navigate('Map')} >
+               <Image source={require('./img/pin.png')} style={{ height: responsiveHeight(7.5), width: responsiveWidth(10), flex: 1 }} />
+         
+         </TouchableOpacity>
           </View>
 
         
@@ -140,10 +142,11 @@ class Dashboard extends Component {
 
 
           <View>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Order')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('PaymentsOptions')}>
               <Card style={styles.card}>
 
-                <Image source={require('./img/easyindiancooking-07343d8ce3ce47da8c3b5d7ac2df5532.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(99), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
+               <Image source={require('./img/easyindiancooking-07343d8ce3ce47da8c3b5d7ac2df5532.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(99), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10,
+     }} />
 
 
                 <Body>
@@ -312,6 +315,8 @@ const styles = StyleSheet.create({
 
   card: {
     borderRadius: 15,
+    
+    flex:1,
 
   },
   
@@ -324,11 +329,13 @@ const styles = StyleSheet.create({
     marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
     backgroundColor: 'white',
     borderRadius: 8,
+   
     
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: 'cover',
+   
   },
 
 

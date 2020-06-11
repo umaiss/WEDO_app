@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "274125605863",
+    "firebase_url": "https://wedo-f313d.firebaseio.com",
+    "project_id": "wedo-f313d",
+    "storage_bucket": "wedo-f313d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274125605863:android:41481f9600962d5bf88b42",
+        "android_client_info": {
+          "package_name": "com.wedo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274125605863-ut2clilahh2kmu5l6ooi93ekovn73l6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqDzBuh5ffqx_bDXAFP-PozpLbrAIDKm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274125605863-p4fnvs3hc3duui5nkdkh67dplv2s7sle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

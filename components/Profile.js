@@ -6,11 +6,21 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
+import { Appbar } from 'react-native-paper';
 export default class Profile extends Component {
 
   render() {
     return (
       <View style={styles.container}>
+               <Appbar.Header style={{backgroundColor:'#BE1E2D'}}>
+           
+           <Appbar.BackAction
+             onPress={() =>this.props.navigation.goBack()}
+           />
+           <Appbar.Content
+             title="Profile"
+           />
+         </Appbar.Header>
           <View style={styles.header}></View>
           <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
           <View style={styles.body}>

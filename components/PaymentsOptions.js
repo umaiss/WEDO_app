@@ -26,10 +26,17 @@ export default class PaymentsOptions extends Component {
        <View style={styles.container}>
          <SafeAreaView>
          <ScrollView>
-         <Appbar style={styles.header}>
-        <Appbar.Action icon="back" onPress={() => console.log('Pressed archive')} />
-    
-      </Appbar>
+
+
+         <Appbar.Header style={{backgroundColor:'#BE1E2D'}}>
+           
+        <Appbar.BackAction
+          onPress={() =>this.props.navigation.goBack()}
+        />
+        <Appbar.Content
+          title="Payment Options"
+        />
+      </Appbar.Header>
 
 <Card style={styles.card}>
 <View style={{flexDirection:'row',flex:1}} >
@@ -37,7 +44,7 @@ export default class PaymentsOptions extends Component {
 <Image source={require('./img/easypaisa.png')} style={{height:responsiveHeight(15), width:responsiveWidth(25),}}/>
         </View>
       <View style={{marginLeft:270,marginTop:30}}>
-
+      
         <RadioButton  
           value="first"
           color="brown"
@@ -58,7 +65,7 @@ export default class PaymentsOptions extends Component {
 <Image source={require('./img/cash.jpg')} style={{height:responsiveHeight(15), width:responsiveWidth(25),}}/>
         </View>
       <View style={{marginLeft:270,marginTop:20}}>
-
+     
         <RadioButton  
           value="second"
           color="brown"
@@ -71,11 +78,12 @@ export default class PaymentsOptions extends Component {
 
 
         
-        <View style={Styles.btn}>
+        <View style={styles.btn}>
                     <Button  mode="outlined"
-                    color='#BE1E2D'
-                        onPress={this.SubmitForm} >
-                        login
+                    color='#BE1E2D'onPress={() => {
+                      this.props.navigation.navigate('PaymentIntegration')}}
+                        >
+                        Confirm
                 </Button>
                 </View>
 
@@ -105,12 +113,7 @@ const styles = StyleSheet.create({
     card:{
       borderRadius:15
     },
-    bottom: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
-    },
+ 
      
  
 });

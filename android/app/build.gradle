@@ -193,6 +193,9 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 	 implementation(project(":react-native-google-signin"))
+     implementation "com.google.android.gms:play-services-base:16.1.0"
+  implementation "com.google.firebase:firebase-core:16.0.9"
+  implementation "com.google.firebase:firebase-messaging:19.0.0"
      implementation project(':react-native-maps')
         implementation(project(':react-native-maps')){
        exclude group: 'com.google.android.gms', module: 'play-services-base'
@@ -232,3 +235,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply plugin: 'com.google.gms.google-services'
