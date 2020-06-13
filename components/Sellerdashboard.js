@@ -33,6 +33,9 @@ class Sellerdashboard extends Component {
         imageSource: null,
         firstQuery: '',
 
+
+        
+
       }
   }
 
@@ -45,51 +48,56 @@ class Sellerdashboard extends Component {
 };
 
 
-  SelectImage = async () => {
-    ImagePicker.showImagePicker({ noDare: true, mediaType: "photo" }, (response) => {
+SelectImage = async () => {
+  ImagePicker.showImagePicker({ noDare: true, mediaType: "photo" }, (response) => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+          console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+          console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+          console.log('User tapped custom button: ', response.customButton);
       } else {
-        this.setState({
-          avatarSource: response.uri,
-          opacity: 0
-        });
-        const image = response.uri
-        const Blob = RNFetchBlob.polyfill.Blob
-        const fs = RNFetchBlob.fs
-        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
-        window.Blob = Blob
-
-        let uploadBlob = null
-        const imageRef = firebase.storage().ref('posts').child("test3.jpg")
-        let mime = 'image/jpg'
-        fs.readFile(image, 'base64')
-          .then((data) => {
-            return Blob.build(data, { type: `${mime};BASE64` })
-          })
-          .then((blob) => {
-            uploadBlob = blob
-            return imageRef.put(blob, { contentType: mime })
-          })
-          .then(() => {
-            uploadBlob.close()
-            return imageRef.getDownloadURL()
-          })
-          .then((url) => {
-            // URL of the image uploaded on Firebase storage
-            console.log(url);
-          })
-          .catch((error) => {
-            console.log(error);
-
-          })
+          this.setState({
+              avatarSource: response.uri,
+              opacity: 0
+          });
+          this.setState({ ImgRes: response.uri })
       }
-    });
-  }
+  });
+}
+
+uploadImage = async () => {
+  console.log('I am Here', this.state.ImgRes)
+  const image = this.state.ImgRes
+  const Blob = RNFetchBlob.polyfill.Blob
+  const fs = RNFetchBlob.fs
+  window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+  window.Blob = Blob
+
+  let uploadBlob = null
+  const imageRef = await firebase.storage().ref('products').child(`${this.state.productName}.jpg`)
+  let mime = 'image/jpg'
+  await fs.readFile(image, 'base64')
+      .then((data) => {
+          return Blob.build(data, { type: `${mime};BASE64` })
+      })
+      .then((blob) => {
+          uploadBlob = blob
+          return imageRef.put(blob, { contentType: mime })
+      })
+      .then(() => {
+          uploadBlob.close()
+          return imageRef.getDownloadURL()
+      })
+      .then((url) => {
+          this.setState({ productImage: url })
+          console.log('i am in imageupload', this.state.productImage);
+      })
+      .catch((error) => {
+          console.log(error);
+
+      })
+}
 
 
 
