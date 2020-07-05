@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { View, Text,Dimensions,StyleSheet,FlatList,TouchableOpacity,Image ,ScrollView} from 'react-native';
 import { Appbar } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
+// import icons
+import Icon from 'react-native-vector-icons/Ionicons';
 var {height, width } = Dimensions.get('window');
 export default class Categories extends Component {
   constructor(props) {
@@ -16,15 +19,30 @@ export default class Categories extends Component {
         { name: 'sketching ',image: require('./img/sketching.jpg'), id:5},
       ],
       dataFood: [
-        { name: 'food',  image: require('./img/food.jpg'),price:'200',categorie:1},
-        { name: 'baking', image: require('./img/baking.jpg'),price:'200',categorie:1},
-        { name: 'sketching',image:  require('./img/sketching.jpg'),price:'200',categorie:2},
-        { name: 'video',  image: require('./img/download.jpg'),price:'200',categorie:2},
-        { name: 'sketching ',image: require('./img/sketching.jpg'),price:'200',categorie:3},
+        { name: 'Chicken masala',  image: require('./img/cooking1.jpg'),price:'200',categorie:1},
+        // { name: 'vegetable rice', image: require('./img/cooking2.jpg'),price:'200',categorie:1},
+        // { name: 'briyani', image: require('./img/cooking3.jpg'),price:'200',categorie:1},
+        { name: 'Chicken karahi', image: require('./img/cooking4.jpg'),price:'200',categorie:1},
+        { name: 'zarda', image: require('./img/cooking5.jpg'),price:'200',categorie:1},
+        // { name: 'Kheer', image: require('./img/cooking6.jpg'),price:'200',categorie:1},
+        { name: 'Meat karahi', image: require('./img/cooking7.jpg'),price:'200',categorie:1},
+        { name: 'pastery',image:  require('./img/cakeone.jpg'),price:'200',categorie:2},
+        { name: 'cake',  image: require('./img/cake2.jpg'),price:'200',categorie:2},
+        { name: 'black pastery',  image: require('./img/cake3.jpg'),price:'200',categorie:2},
+        // { name: 'choco cake',  image: require('./img/cake4.jpg'),price:'200',categorie:2},
+        { name: 'cream cake',  image: require('./img/cake5.jpg'),price:'200',categorie:2},
+        { name: 'portrait',image: require('./img/ske5.jpg'),price:'200',categorie:3},
+        // { name: 'pencil sketch ',image: require('./img/ske2.jpg'),price:'200',categorie:3},
+        { name: 'digital sketch ',image: require('./img/ske3.jpg'),price:'200',categorie:3},
+        { name: 'diital sketch ',image: require('./img/ske4.jpg'),price:'200',categorie:3},
+        { name: 'hand make sketch ',image: require('./img/ske1.jpg'),price:'200',categorie:3},
+        
       ],
       selectCatg:0
     };
   }
+
+ 
 
   _renderItem(item){
     return(
@@ -56,9 +74,54 @@ export default class Categories extends Component {
             </Text>
             <Text>Descp Food and Details</Text>
             <Text style={{fontSize:20,color:"green"}}>${item.price}</Text>
+
+            <TouchableOpacity
+            onPress={()=>this.onClickAddCart(item)}
+            style={{
+              width:(width/2)-40,
+              backgroundColor:'#BE1E2D',
+              flexDirection:'row',
+              alignItems:'center',
+              justifyContent:"center",
+              borderRadius:5,
+              padding:4
+            }}>
+            <Text style={{fontSize:18, color:"white", fontWeight:"bold"}}>Add Cart</Text>
+            <View style={{width:10}} />
+            <Icon name="ios-add-circle" size={30} color={"white"} />
+          </TouchableOpacity>
+
+
+
           </TouchableOpacity>
         )
     }
+  }
+  onClickAddCart(data){
+
+    const itemcart = {
+      food: data,
+      quantity:  1,
+      price: data.price
+    }
+ 
+    AsyncStorage.getItem('cart').then((datacart)=>{
+        if (datacart !== null) {
+          // We have data!!
+          const cart = JSON.parse(datacart)
+          cart.push(itemcart)
+          AsyncStorage.setItem('cart',JSON.stringify(cart));
+        }
+        else{
+          const cart  = []
+          cart.push(itemcart)
+          AsyncStorage.setItem('cart',JSON.stringify(cart));
+        }
+        alert("Add Cart")
+      })
+      .catch((err)=>{
+        alert(err)
+      })
   }
 
   render() {
