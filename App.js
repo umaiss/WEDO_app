@@ -43,6 +43,8 @@ import * as firebase from 'firebase'
 import firestore from 'firebase/firestore'
 import PaymentIntegration from './components/PaymentIntegration';
 import Notification from './components/Notification';
+import Chat from './components/chat';
+import CustomeOrder from './components/CustomeOrder'
 
 
 
@@ -64,7 +66,11 @@ import Notification from './components/Notification';
         Map:Map,
         Auth:Auth,
         PaymentIntegration:PaymentIntegration,
-        Notification:Notification
+        Notification:Notification,
+        chat:Chat,
+        CustomeOrder:CustomeOrder
+
+
        
       },
       {

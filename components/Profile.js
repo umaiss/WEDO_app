@@ -25,14 +25,19 @@ export default class Profile extends Component {
           <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>Umias</Text>
-              <Text style={styles.info}>Email / NUMBER</Text>
+              <Text style={styles.name}>Umais</Text>
+              <Text style={styles.info}>mianumais@gmail.com / 0334-0502053</Text>
               
               <TouchableOpacity style={styles.buttonContainer}
                onPress={() => this.props.navigation.navigate('Dashboard')}
               >
                 <Text  style={{color:'white'}}>Home</Text>  
-              </TouchableOpacity>              
+              </TouchableOpacity>    
+              <TouchableOpacity style={styles.buttonContainer}
+               onPress={() => this.props.navigation.navigate('Sellerdashboard')}
+              >
+                <Text style={{color:'white'}}>Switch to seller account</Text> 
+              </TouchableOpacity>          
               <TouchableOpacity style={styles.buttonContainer}
                onPress={() => this.props.navigation.navigate('Login')}
               >

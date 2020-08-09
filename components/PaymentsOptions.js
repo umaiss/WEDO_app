@@ -43,7 +43,7 @@ export default class PaymentsOptions extends Component {
   <View>
 <Image source={require('./img/easypaisa.png')} style={{height:responsiveHeight(15), width:responsiveWidth(25),}}/>
         </View>
-      <View style={{marginLeft:270,marginTop:30}}>
+      <View style={{marginLeft:230,marginTop:30}}>
       
         <RadioButton  
           value="first"
@@ -64,7 +64,7 @@ export default class PaymentsOptions extends Component {
   <View>
 <Image source={require('./img/cash.jpg')} style={{height:responsiveHeight(15), width:responsiveWidth(25),}}/>
         </View>
-      <View style={{marginLeft:270,marginTop:20}}>
+      <View style={{marginLeft:230,marginTop:20}}>
      
         <RadioButton  
           value="second"

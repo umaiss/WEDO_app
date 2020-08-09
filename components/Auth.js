@@ -147,3 +147,41 @@ export default class Auth extends Component {
         )
     }
 }
+
+export async function addToArray(collection, doc, array, value) {
+    let docRef = await
+      firebase.firestore().collection(collection).doc(doc);
+    let docData = await docRef.get();
+    if (docData.exists && (docData.data()[array] != undefined)) {
+      docRef.update({
+        [array]: firebase.firestore.FieldValue.arrayUnion(value)
+      });
+    }
+    else {
+      saveData(collection, doc, { [array]: [value] });
+    }
+  }
+
+
+
+  export function getData(collection, doc, objectKey) {
+    // check if data exists on the given path
+    if (objectKey === undefined) {
+      return firebase.firestore().collection(collection).doc(doc).get().then(function (doc) {
+        if (doc.exists) {
+          return doc.data();
+        } else {
+          return false;
+        }
+      })
+    }
+    else {
+      return firebase.firestore().collection(collection).doc(doc).get().then(function (doc) {
+        if (doc.exists && (doc.data()[objectKey] != undefined)) {
+          return (doc.data()[objectKey]);
+        } else {
+          return false;
+        }
+      })
+    }
+  }

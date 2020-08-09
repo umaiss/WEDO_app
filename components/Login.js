@@ -22,8 +22,8 @@ export default class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: '',
-            password: '',
+            email: 'mianumais1997@gmail.com',
+            password: '123456789',
             token: null,
 
             errem: '',

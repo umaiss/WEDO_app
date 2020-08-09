@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, ImageBackground, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { createAppContainer } from 'react-navigation';
@@ -32,6 +31,10 @@ class Sellerdashboard extends Component {
         Card2Visible: false,
         imageSource: null,
         firstQuery: '',
+        dealName : '',
+        price : '',
+        storeName : '',
+        description : '',
 
 
         
@@ -134,72 +137,115 @@ uploadImage = async () => {
                     <ScrollView>
 
 
-                      <Dialog
-                        visible={this.state.visible}
-                        footer={
-                          <DialogFooter >
-                            <DialogButton
-                              text="CANCEL"
-                              onPress={
-                                this.toggleModal
-                              }
-                            // style={[styles.btn, { backgroundColor: '#DB4437' }]}
-                            />
-                            <DialogButton
-                              text="Add"
-                            // style={[styles.btn, { backgroundColor: '#4285F4' }]}
-                            />
-                          </DialogFooter>
-                        }
-                      >
-                        <DialogContent style={styles.DialogCard}>
-                          <View style={styles.AddContainer}>
+                    <Dialog
 
-                            <Text style={styles.ImageText}>Tap To Add Images</Text>
-                            <TouchableOpacity style={styles.ProductImagesCard} activeOpacity={0.5} onPress={this.SelectImage}>
-                              <View>
-                                {
-                                  this.state.avatarSource && <Image source={{ uri: this.state.avatarSource }}
-                                    style={{ height: responsiveHeight(20), width: responsiveWidth(45), justifyContent: 'center', alignSelf: 'center', borderWidth: 4, borderColor: 'white' }} />
-                                }
-                              </View>
-                            </TouchableOpacity>
+visible={this.state.visible}
+footer={
+  <DialogFooter style={{marginTop : 70}} >
+    <DialogButton
+      text="CANCEL"
+      onPress={
+        this.toggleModal
+      }
+    // style={[styles.btn, { backgroundColor: '#DB4437' }]}
+    />
+    
+    <DialogButton 
+      text="Addd"
+      onPress =  { () => {{this.props.navigation.navigate('Categories' , {
+        dealName : this.state.dealName,
+        price : this.state.price,
+        storeName : this.state.storeName,
+        description : this.state.description
+        
+      },
+      )}
+    
+    }
+    
+  }
+     
+    // style={[styles.btn, { backgroundColor: '#4285F4' }]}
+    />
+  </DialogFooter>
+}
+>
+<DialogContent style={styles.DialogCard}>
+  <View style={styles.AddContainer}>
 
+    <Text style={styles.ImageText}>Tap To Add Images</Text>
+    <TouchableOpacity style={styles.ProductImagesCard} activeOpacity={0.5} onPress={this.SelectImage}> 
+    
 
-
-                            <TextInput
-                              style={styles.inputField}
-                              placeholder='Deal Name'
-                              keyboardType='Default'
-                              underlineColorAndroid="transparent"
-                            />
-
-                            <Form >
-                              <Textarea rowSpan={5} bordered placeholder="TDescription" style={{ borderRadius: 10, marginTop: 20, backgroundColor: '#e6e6e6' }} />
-                            </Form>
+     </TouchableOpacity>
 
 
+{/* <SafeAreaView style={styles.container}>
+<TouchableOpacity style={styles.selectButton} onPress={selectImage}>
+<Text style={styles.buttonText}>Pick an image</Text>
+</TouchableOpacity>
+<View style={styles.imageContainer}>
+{image !== null ? (
+<Image source={{ uri: image.uri }} style={styles.imageBox} />
+) : null}
+{uploading ? (
+<View style={styles.progressBarContainer}>
+<Progress.Bar progress={transferred} width={300} />
+</View>
+) : (
+<TouchableOpacity style={styles.uploadButton} onPress={uploadImage}>
+<Text style={styles.buttonText}>Upload image</Text>
+</TouchableOpacity>
+)}
+</View>
+</SafeAreaView> */}
 
-                            <TextInput
-                              style={styles.inputField}
-                              placeholder='Price'
-                              keyboardType='Default'
-                              underlineColorAndroid="transparent"
-                            />
-
-                            <TextInput
-                              style={styles.inputField}
-                              placeholder='Store Name'
-                              keyboardType='Default'
-                              underlineColorAndroid="transparent"
-                              multiline={true}
-                            />
+    
 
 
 
-                          </View>
-                        </DialogContent>
-                      </Dialog>
+    <TextInput  
+
+      style={styles.inputField}
+      placeholder='Deal Name'
+      keyboardType='Default'
+      underlineColorAndroid="transparent"
+      onChangeText={(dealName) => this.setState({dealName})}
+     value={this.state.dealName}
+    />
+       {this.saveUserId}
+
+
+<Form >
+<Textarea onChangeText={(description) => this.setState({description})}
+      value={this.state.description} rowSpan={5} bordered placeholder="Description" style={{borderRadius:10,marginTop:20,backgroundColor:'#e6e6e6'}}/>
+</Form>
+
+
+    <TextInput
+      style={styles.inputField}
+      placeholder='Price'
+      keyboardType='Default'
+      underlineColorAndroid="transparent"
+      onChangeText={(price) => this.setState({price})}
+      value={this.state.price}
+    />
+
+    <TextInput
+      style={styles.inputField}
+      placeholder='Store Name'
+      keyboardType='Default'
+      underlineColorAndroid="transparent"
+      multiline={true}
+      onChangeText={(storeName) => this.setState({storeName})}
+      value={this.state.storeName}
+    />
+
+
+
+  </View>
+</DialogContent>
+</Dialog>
                     </ScrollView>
 
                     <Image source={require('./img/bread-background-wheat-aromatic-crispbread-grains-copy-space-top-view-bakery-grocery-food-store-concept-134406721.jpg')} style={{ height: responsiveHeight(24), width: responsiveWidth(50), flex: 1, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
@@ -257,13 +303,13 @@ uploadImage = async () => {
 
                             <TextInput
                               style={styles.inputField}
-                              placeholder='Deal Name'
+                              placeholder='Store Name'
                               keyboardType='Default'
                               underlineColorAndroid="transparent"
                             />
 
                             <Form >
-                              <Textarea rowSpan={5} bordered placeholder="TDescription" style={{ borderRadius: 10, marginTop: 20, backgroundColor: '#e6e6e6' }} />
+                              <Textarea rowSpan={5} bordered placeholder="Description" style={{ borderRadius: 10, marginTop: 20, backgroundColor: '#e6e6e6' }} />
                             </Form>
 
 

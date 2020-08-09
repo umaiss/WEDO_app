@@ -13,9 +13,10 @@ import { Searchbar, } from 'react-native-paper';
 
 import Cart from './Cart';
 import Categories from './Categories';
-import Order from './Order';
+import chat from './chat';
 import Profile from './Profile';
 import Map from './Map';
+
 
 const { width: screenWidth } = Dimensions.get('window')
 class Dashboard extends Component {
@@ -237,10 +238,10 @@ const TabNavigator = createBottomTabNavigator({
       )
     }
   },
-  Order: {
-    screen: Order,
+  chat: {
+    screen: chat,
     navigationOptions: {
-      tabBarLabel: 'Order',
+      tabBarLabel: 'Chat',
       tabBarIcon: () => (
         <Icon name="shopping-bag" color={"#BE1E2D"} size={25} />
       )

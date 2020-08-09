@@ -19,23 +19,23 @@ export default class Categories extends Component {
         { name: 'sketching ',image: require('./img/sketching.jpg'), id:5},
       ],
       dataFood: [
-        { name: 'Chicken masala',  image: require('./img/cooking1.jpg'),price:'200',categorie:1},
+        { name: 'Chicken masala',  image: require('./img/cooking1.jpg'),price:'200',categorie:1,phone:'0334-1234567'},
         // { name: 'vegetable rice', image: require('./img/cooking2.jpg'),price:'200',categorie:1},
         // { name: 'briyani', image: require('./img/cooking3.jpg'),price:'200',categorie:1},
-        { name: 'Chicken karahi', image: require('./img/cooking4.jpg'),price:'200',categorie:1},
-        { name: 'zarda', image: require('./img/cooking5.jpg'),price:'200',categorie:1},
+        { name: 'Chicken karahi', image: require('./img/cooking4.jpg'),price:'200',categorie:1,phone:'0334-1234567'},
+        { name: 'zarda', image: require('./img/cooking5.jpg'),price:'200',categorie:1,phone:'0334-1234567'},
         // { name: 'Kheer', image: require('./img/cooking6.jpg'),price:'200',categorie:1},
-        { name: 'Meat karahi', image: require('./img/cooking7.jpg'),price:'200',categorie:1},
-        { name: 'pastery',image:  require('./img/cakeone.jpg'),price:'200',categorie:2},
-        { name: 'cake',  image: require('./img/cake2.jpg'),price:'200',categorie:2},
-        { name: 'black pastery',  image: require('./img/cake3.jpg'),price:'200',categorie:2},
+        { name: 'Meat karahi', image: require('./img/cooking7.jpg'),price:'200',categorie:1,phone:'0334-1234567'},
+        { name: 'pastery',image:  require('./img/cakeone.jpg'),price:'200',categorie:2,phone:'0334-1234567'},
+        { name: 'cake',  image: require('./img/cake2.jpg'),price:'200',categorie:2,phone:'0334-1234567'},
+        { name: 'black pastery',  image: require('./img/cake3.jpg'),price:'200',categorie:2,phone:'0334-1234567'},
         // { name: 'choco cake',  image: require('./img/cake4.jpg'),price:'200',categorie:2},
-        { name: 'cream cake',  image: require('./img/cake5.jpg'),price:'200',categorie:2},
-        { name: 'portrait',image: require('./img/ske5.jpg'),price:'200',categorie:3},
+        { name: 'cream cake',  image: require('./img/cake5.jpg'),price:'200',categorie:2,phone:'0334-1234567'},
+        { name: 'portrait',image: require('./img/ske5.jpg'),price:'200',categorie:3,phone:'0334-1234567'},
         // { name: 'pencil sketch ',image: require('./img/ske2.jpg'),price:'200',categorie:3},
-        { name: 'digital sketch ',image: require('./img/ske3.jpg'),price:'200',categorie:3},
-        { name: 'diital sketch ',image: require('./img/ske4.jpg'),price:'200',categorie:3},
-        { name: 'hand make sketch ',image: require('./img/ske1.jpg'),price:'200',categorie:3},
+        { name: 'digital sketch ',image: require('./img/ske3.jpg'),price:'200',categorie:3,phone:'0334-1234567'},
+        { name: 'diital sketch ',image: require('./img/ske4.jpg'),price:'200',categorie:3,phone:'0334-1234567'},
+        { name: 'hand make sketch ',image: require('./img/ske1.jpg'),price:'200',categorie:3,phone:'0334-1234567'},
         
       ],
       selectCatg:0
@@ -72,8 +72,8 @@ export default class Categories extends Component {
             <Text style={{fontWeight:'bold',fontSize:22,textAlign:'center'}}>
               {item.name}
             </Text>
-            <Text>Descp Food and Details</Text>
-            <Text style={{fontSize:20,color:"green"}}>${item.price}</Text>
+      <Text>{item.phone}</Text>
+            <Text style={{fontSize:20,color:"green"}}>Rs.{item.price}</Text>
 
             <TouchableOpacity
             onPress={()=>this.onClickAddCart(item)}
@@ -91,8 +91,22 @@ export default class Categories extends Component {
             <Icon name="ios-add-circle" size={30} color={"white"} />
           </TouchableOpacity>
 
-
-
+          <TouchableOpacity
+          onPress={()=>this.props.navigation.navigate('CustomeOrder')}
+            style={{
+              width:(width/2)-40,
+              marginTop:5,
+              backgroundColor:'#BE1E2D',
+              flexDirection:'row',
+              alignItems:'center',
+              justifyContent:"center",
+              borderRadius:5,
+              padding:4
+            }}>
+            <Text style={{fontSize:18, color:"white", fontWeight:"bold"}}>Custom Order</Text>
+            <View style={{width:10}} />
+           
+          </TouchableOpacity>
           </TouchableOpacity>
         )
     }
